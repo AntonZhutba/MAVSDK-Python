@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from . import gripper_pb2 as gripper_dot_gripper__pb2
+from . import striker_pb2 as striker_dot_striker__pb2
 
 GRPC_GENERATED_VERSION = '1.70.0'
 GRPC_VERSION = grpc.__version__
@@ -18,16 +18,16 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in gripper/gripper_pb2_grpc.py depends on'
+        + f' but the generated code in striker/striker_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class GripperServiceStub(object):
+class StrikerServiceStub(object):
     """
-    Allows users to send gripper actions.
+    Allow users to get vehicle telemetry and state information
     """
 
     def __init__(self, channel):
@@ -36,67 +36,65 @@ class GripperServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.Grab = channel.unary_unary(
-                '/mavsdk.rpc.gripper.GripperService/Grab',
-                request_serializer=gripper_dot_gripper__pb2.GrabRequest.SerializeToString,
-                response_deserializer=gripper_dot_gripper__pb2.GrabResponse.FromString,
+        self.SubscribeHeartbeat = channel.unary_stream(
+                '/mavsdk.rpc.striker.StrikerService/SubscribeHeartbeat',
+                request_serializer=striker_dot_striker__pb2.SubscribeHeartbeatRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.HeartbeatResponse.FromString,
                 _registered_method=True)
-        self.Release = channel.unary_unary(
-                '/mavsdk.rpc.gripper.GripperService/Release',
-                request_serializer=gripper_dot_gripper__pb2.ReleaseRequest.SerializeToString,
-                response_deserializer=gripper_dot_gripper__pb2.ReleaseResponse.FromString,
+        self.SubscribeSysStatus = channel.unary_stream(
+                '/mavsdk.rpc.striker.StrikerService/SubscribeSysStatus',
+                request_serializer=striker_dot_striker__pb2.SubscribeSysStatusRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.SysStatusResponse.FromString,
                 _registered_method=True)
 
 
-class GripperServiceServicer(object):
+class StrikerServiceServicer(object):
     """
-    Allows users to send gripper actions.
+    Allow users to get vehicle telemetry and state information
     """
 
-    def Grab(self, request, context):
-        """
-        Gripper grab cargo.
+    def SubscribeHeartbeat(self, request, context):
+        """Subscribe to 'Heartbeat' updates.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Release(self, request, context):
-        """
-        Gripper release cargo.
+    def SubscribeSysStatus(self, request, context):
+        """Subscribe to 'Sys Status' updates.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_GripperServiceServicer_to_server(servicer, server):
+def add_StrikerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Grab': grpc.unary_unary_rpc_method_handler(
-                    servicer.Grab,
-                    request_deserializer=gripper_dot_gripper__pb2.GrabRequest.FromString,
-                    response_serializer=gripper_dot_gripper__pb2.GrabResponse.SerializeToString,
+            'SubscribeHeartbeat': grpc.unary_stream_rpc_method_handler(
+                    servicer.SubscribeHeartbeat,
+                    request_deserializer=striker_dot_striker__pb2.SubscribeHeartbeatRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.HeartbeatResponse.SerializeToString,
             ),
-            'Release': grpc.unary_unary_rpc_method_handler(
-                    servicer.Release,
-                    request_deserializer=gripper_dot_gripper__pb2.ReleaseRequest.FromString,
-                    response_serializer=gripper_dot_gripper__pb2.ReleaseResponse.SerializeToString,
+            'SubscribeSysStatus': grpc.unary_stream_rpc_method_handler(
+                    servicer.SubscribeSysStatus,
+                    request_deserializer=striker_dot_striker__pb2.SubscribeSysStatusRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.SysStatusResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'mavsdk.rpc.gripper.GripperService', rpc_method_handlers)
+            'mavsdk.rpc.striker.StrikerService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('mavsdk.rpc.gripper.GripperService', rpc_method_handlers)
+    server.add_registered_method_handlers('mavsdk.rpc.striker.StrikerService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class GripperService(object):
+class StrikerService(object):
     """
-    Allows users to send gripper actions.
+    Allow users to get vehicle telemetry and state information
     """
 
     @staticmethod
-    def Grab(request,
+    def SubscribeHeartbeat(request,
             target,
             options=(),
             channel_credentials=None,
@@ -106,12 +104,12 @@ class GripperService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(
+        return grpc.experimental.unary_stream(
             request,
             target,
-            '/mavsdk.rpc.gripper.GripperService/Grab',
-            gripper_dot_gripper__pb2.GrabRequest.SerializeToString,
-            gripper_dot_gripper__pb2.GrabResponse.FromString,
+            '/mavsdk.rpc.striker.StrikerService/SubscribeHeartbeat',
+            striker_dot_striker__pb2.SubscribeHeartbeatRequest.SerializeToString,
+            striker_dot_striker__pb2.HeartbeatResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -123,7 +121,7 @@ class GripperService(object):
             _registered_method=True)
 
     @staticmethod
-    def Release(request,
+    def SubscribeSysStatus(request,
             target,
             options=(),
             channel_credentials=None,
@@ -133,12 +131,12 @@ class GripperService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(
+        return grpc.experimental.unary_stream(
             request,
             target,
-            '/mavsdk.rpc.gripper.GripperService/Release',
-            gripper_dot_gripper__pb2.ReleaseRequest.SerializeToString,
-            gripper_dot_gripper__pb2.ReleaseResponse.FromString,
+            '/mavsdk.rpc.striker.StrikerService/SubscribeSysStatus',
+            striker_dot_striker__pb2.SubscribeSysStatusRequest.SerializeToString,
+            striker_dot_striker__pb2.SysStatusResponse.FromString,
             options,
             channel_credentials,
             insecure,

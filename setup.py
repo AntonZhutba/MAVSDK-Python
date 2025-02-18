@@ -108,7 +108,7 @@ class custom_build(build):
         """
         Build the url of the `mavsdk_server` binary
         """
-        return "https://github.com/mavlink/MAVSDK/releases/download/" \
+        return "https://github.com/AntonZhutba/MAVSDK/releases/download/" \
             f"{self.mavsdk_server_tag}/mavsdk_server_{self.platform_suffix}"
 
     def run(self):
@@ -149,7 +149,7 @@ setup(
     description="Python wrapper for MAVSDK",
     long_description=parse_long_description(),
     long_description_content_type="text/markdown",
-    url="https://github.com/mavlink/MAVSDK-Python",
+    url="https://github.com/AntonZhutba/MAVSDK-Python",
     maintainer="Jonas Vautherin, Julian Oes",
     maintainer_email="jonas@auterion.com, julian.oes@auterion.com",
     python_requires='>=3.7',
@@ -168,7 +168,7 @@ setup(
     install_requires=parse_requirements("requirements.txt"),
 
     project_urls={
-        "Bug Reports": "https://github.com/mavlink/MAVSDK-Python/issues",
-        "Source": "https://github.com/mavlink/MAVSDK-Python/",
+        "Bug Reports": "https://github.com/AntonZhutba/MAVSDK-Python/issues",
+        "Source": "https://github.com/AntonZhutba/MAVSDK-Python/",
     },
 )

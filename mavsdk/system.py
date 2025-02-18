@@ -32,6 +32,7 @@ from . import param_server
 from . import rtk
 from . import server_utility
 from . import shell
+from . import striker
 from . import telemetry
 from . import telemetry_server
 from . import tracking_server
@@ -157,6 +158,7 @@ class System:
         self._plugins["rtk"] = rtk.Rtk(plugin_manager)
         self._plugins["server_utility"] = server_utility.ServerUtility(plugin_manager)
         self._plugins["shell"] = shell.Shell(plugin_manager)
+        self._plugins["striker"] = striker.Striker(plugin_manager)
         self._plugins["telemetry"] = telemetry.Telemetry(plugin_manager)
         self._plugins["telemetry_server"] = telemetry_server.TelemetryServer(plugin_manager)
         self._plugins["tracking_server"] = tracking_server.TrackingServer(plugin_manager)
@@ -330,6 +332,12 @@ class System:
         if "shell" not in self._plugins:
             raise RuntimeError(self.error_uninitialized("Shell"))
         return self._plugins["shell"]
+
+    @property
+    def striker(self) -> striker.Striker:
+        if "striker" not in self._plugins:
+            raise RuntimeError(self.error_uninitialized("Striker"))
+        return self._plugins["striker"]
 
     @property
     def telemetry(self) -> telemetry.Telemetry:
