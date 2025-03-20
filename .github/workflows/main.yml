@@ -22,7 +22,6 @@ jobs:
       - name: Get tags
         run: |
           git fetch --tags
-          echo $?
           git tag --list
 
       - name: Install pip
@@ -45,6 +44,16 @@ jobs:
           mkdir wheelhouse
           export PATH=$PATH:$HOME/.local/bin
           auditwheel repair --plat manylinux2014_x86_64 dist/*.whl
+
+      - name: Rename wheel for clarity
+        run: |
+          mavsdk_version="3.2.0"
+          striker_version="1.0.1"
+          os_name="ubuntu22.04"
+          arch="x86_64"
+          for f in wheelhouse/*.whl; do
+            mv "$f" "wheelhouse/mavsdk-${mavsdk_version}-striker-${striker_version}-${os_name}-${arch}.whl"
+          done
 
       - name: Check the artifacts
         run: |
@@ -102,6 +111,16 @@ jobs:
           python3 setup.py bdist_wheel
           ls dist/*any.whl | sed -e 'p;s/any/${{ matrix.pypi_arch }}/' | xargs -n2 mv
 
+      - name: Rename wheel for clarity
+        run: |
+          mavsdk_version="3.2.0"
+          striker_version="1.0.1"
+          os_name="ubuntu22.04"
+          arch="${{ matrix.arch }}"
+          for f in dist/*.whl; do
+            mv "$f" "dist/mavsdk-${mavsdk_version}-striker-${striker_version}-${os_name}-${arch}.whl"
+          done
+
       - name: Check the artifacts
         run: |
           ls -lh "dist/"
@@ -155,6 +174,16 @@ jobs:
           delocate-wheel -w wheelhouse -v dist/*.whl
           ls wheelhouse/*any.whl | sed -e 'p;s/any/macosx_${{ matrix.wheel_arch }}/' | xargs -n2 mv
 
+      - name: Rename wheel for clarity
+        run: |
+          mavsdk_version="3.2.0"
+          striker_version="1.0.1"
+          os_name="macos-${{ matrix.runs_on == 'macos-13' && '13' || '14' }}"
+          arch="${{ matrix.arch }}"
+          for f in wheelhouse/*.whl; do
+            mv "$f" "wheelhouse/mavsdk-${mavsdk_version}-striker-${striker_version}-${os_name}-${arch}.whl"
+          done
+
       - name: Check the artifacts
         run: |
           ls -lh "wheelhouse/"
@@ -205,6 +234,15 @@ jobs:
         run: |
           python3 setup.py bdist_wheel
           Dir "dist/" | rename-item -NewName {$_.name -replace '-any.whl','-${{ matrix.wheel_arch }}.whl'}
+
+      - name: Rename wheel for clarity
+        shell: pwsh
+        run: |
+          $mavsdk_version = "3.2.0"
+          $striker_version = "1.0.1"
+          $os_name = "windows"
+          $arch = "${{ matrix.wheel_arch }}"
+          Get-ChildItem dist/*.whl | Rename-Item -NewName { "mavsdk-$mavsdk_version-striker-$striker_version-$os_name-$arch.whl" }
 
       - name: Check the artifacts
         run: |
