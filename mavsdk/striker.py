@@ -442,6 +442,539 @@ class SysStatus:
         
 
 
+class RcChannel:
+    """
+     RC_Channel type.
+
+     Parameters
+     ----------
+     time_boot_ms : uint32_t
+         
+     chan1_raw : uint32_t
+         
+     chan2_raw : uint32_t
+         
+     chan3_raw : uint32_t
+         
+     chan4_raw : uint32_t
+         
+     chan5_raw : uint32_t
+         
+     chan6_raw : uint32_t
+         
+     chan7_raw : uint32_t
+         
+     chan8_raw : uint32_t
+         
+     chan9_raw : uint32_t
+         
+     chan10_raw : uint32_t
+         
+     chan11_raw : uint32_t
+         
+     chan12_raw : uint32_t
+         
+     chan13_raw : uint32_t
+         
+     chan14_raw : uint32_t
+         
+     chan15_raw : uint32_t
+         
+     chan16_raw : uint32_t
+         
+     chan17_raw : uint32_t
+         
+     chan18_raw : uint32_t
+         
+     chancount : uint32_t
+         
+     rssi : uint32_t
+         
+     """
+
+    
+
+    def __init__(
+            self,
+            time_boot_ms,
+            chan1_raw,
+            chan2_raw,
+            chan3_raw,
+            chan4_raw,
+            chan5_raw,
+            chan6_raw,
+            chan7_raw,
+            chan8_raw,
+            chan9_raw,
+            chan10_raw,
+            chan11_raw,
+            chan12_raw,
+            chan13_raw,
+            chan14_raw,
+            chan15_raw,
+            chan16_raw,
+            chan17_raw,
+            chan18_raw,
+            chancount,
+            rssi):
+        """ Initializes the RcChannel object """
+        self.time_boot_ms = time_boot_ms
+        self.chan1_raw = chan1_raw
+        self.chan2_raw = chan2_raw
+        self.chan3_raw = chan3_raw
+        self.chan4_raw = chan4_raw
+        self.chan5_raw = chan5_raw
+        self.chan6_raw = chan6_raw
+        self.chan7_raw = chan7_raw
+        self.chan8_raw = chan8_raw
+        self.chan9_raw = chan9_raw
+        self.chan10_raw = chan10_raw
+        self.chan11_raw = chan11_raw
+        self.chan12_raw = chan12_raw
+        self.chan13_raw = chan13_raw
+        self.chan14_raw = chan14_raw
+        self.chan15_raw = chan15_raw
+        self.chan16_raw = chan16_raw
+        self.chan17_raw = chan17_raw
+        self.chan18_raw = chan18_raw
+        self.chancount = chancount
+        self.rssi = rssi
+
+    def __eq__(self, to_compare):
+        """ Checks if two RcChannel are the same """
+        try:
+            # Try to compare - this likely fails when it is compared to a non
+            # RcChannel object
+            return \
+                (self.time_boot_ms == to_compare.time_boot_ms) and \
+                (self.chan1_raw == to_compare.chan1_raw) and \
+                (self.chan2_raw == to_compare.chan2_raw) and \
+                (self.chan3_raw == to_compare.chan3_raw) and \
+                (self.chan4_raw == to_compare.chan4_raw) and \
+                (self.chan5_raw == to_compare.chan5_raw) and \
+                (self.chan6_raw == to_compare.chan6_raw) and \
+                (self.chan7_raw == to_compare.chan7_raw) and \
+                (self.chan8_raw == to_compare.chan8_raw) and \
+                (self.chan9_raw == to_compare.chan9_raw) and \
+                (self.chan10_raw == to_compare.chan10_raw) and \
+                (self.chan11_raw == to_compare.chan11_raw) and \
+                (self.chan12_raw == to_compare.chan12_raw) and \
+                (self.chan13_raw == to_compare.chan13_raw) and \
+                (self.chan14_raw == to_compare.chan14_raw) and \
+                (self.chan15_raw == to_compare.chan15_raw) and \
+                (self.chan16_raw == to_compare.chan16_raw) and \
+                (self.chan17_raw == to_compare.chan17_raw) and \
+                (self.chan18_raw == to_compare.chan18_raw) and \
+                (self.chancount == to_compare.chancount) and \
+                (self.rssi == to_compare.rssi)
+
+        except AttributeError:
+            return False
+
+    def __str__(self):
+        """ RcChannel in string representation """
+        struct_repr = ", ".join([
+                "time_boot_ms: " + str(self.time_boot_ms),
+                "chan1_raw: " + str(self.chan1_raw),
+                "chan2_raw: " + str(self.chan2_raw),
+                "chan3_raw: " + str(self.chan3_raw),
+                "chan4_raw: " + str(self.chan4_raw),
+                "chan5_raw: " + str(self.chan5_raw),
+                "chan6_raw: " + str(self.chan6_raw),
+                "chan7_raw: " + str(self.chan7_raw),
+                "chan8_raw: " + str(self.chan8_raw),
+                "chan9_raw: " + str(self.chan9_raw),
+                "chan10_raw: " + str(self.chan10_raw),
+                "chan11_raw: " + str(self.chan11_raw),
+                "chan12_raw: " + str(self.chan12_raw),
+                "chan13_raw: " + str(self.chan13_raw),
+                "chan14_raw: " + str(self.chan14_raw),
+                "chan15_raw: " + str(self.chan15_raw),
+                "chan16_raw: " + str(self.chan16_raw),
+                "chan17_raw: " + str(self.chan17_raw),
+                "chan18_raw: " + str(self.chan18_raw),
+                "chancount: " + str(self.chancount),
+                "rssi: " + str(self.rssi)
+                ])
+
+        return f"RcChannel: [{struct_repr}]"
+
+    @staticmethod
+    def translate_from_rpc(rpcRcChannel):
+        """ Translates a gRPC struct to the SDK equivalent """
+        return RcChannel(
+                
+                rpcRcChannel.time_boot_ms,
+                
+                
+                rpcRcChannel.chan1_raw,
+                
+                
+                rpcRcChannel.chan2_raw,
+                
+                
+                rpcRcChannel.chan3_raw,
+                
+                
+                rpcRcChannel.chan4_raw,
+                
+                
+                rpcRcChannel.chan5_raw,
+                
+                
+                rpcRcChannel.chan6_raw,
+                
+                
+                rpcRcChannel.chan7_raw,
+                
+                
+                rpcRcChannel.chan8_raw,
+                
+                
+                rpcRcChannel.chan9_raw,
+                
+                
+                rpcRcChannel.chan10_raw,
+                
+                
+                rpcRcChannel.chan11_raw,
+                
+                
+                rpcRcChannel.chan12_raw,
+                
+                
+                rpcRcChannel.chan13_raw,
+                
+                
+                rpcRcChannel.chan14_raw,
+                
+                
+                rpcRcChannel.chan15_raw,
+                
+                
+                rpcRcChannel.chan16_raw,
+                
+                
+                rpcRcChannel.chan17_raw,
+                
+                
+                rpcRcChannel.chan18_raw,
+                
+                
+                rpcRcChannel.chancount,
+                
+                
+                rpcRcChannel.rssi
+                )
+
+    def translate_to_rpc(self, rpcRcChannel):
+        """ Translates this SDK object into its gRPC equivalent """
+
+        
+        
+            
+        rpcRcChannel.time_boot_ms = self.time_boot_ms
+            
+        
+        
+        
+            
+        rpcRcChannel.chan1_raw = self.chan1_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan2_raw = self.chan2_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan3_raw = self.chan3_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan4_raw = self.chan4_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan5_raw = self.chan5_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan6_raw = self.chan6_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan7_raw = self.chan7_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan8_raw = self.chan8_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan9_raw = self.chan9_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan10_raw = self.chan10_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan11_raw = self.chan11_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan12_raw = self.chan12_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan13_raw = self.chan13_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan14_raw = self.chan14_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan15_raw = self.chan15_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan16_raw = self.chan16_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan17_raw = self.chan17_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chan18_raw = self.chan18_raw
+            
+        
+        
+        
+            
+        rpcRcChannel.chancount = self.chancount
+            
+        
+        
+        
+            
+        rpcRcChannel.rssi = self.rssi
+            
+        
+        
+
+
+class Magnitometer:
+    """
+ 
+
+     Parameters
+     ----------
+     x : double
+         
+     y : double
+         
+     z : double
+         
+     magnetic_heading : double
+         
+     """
+
+    
+
+    def __init__(
+            self,
+            x,
+            y,
+            z,
+            magnetic_heading):
+        """ Initializes the Magnitometer object """
+        self.x = x
+        self.y = y
+        self.z = z
+        self.magnetic_heading = magnetic_heading
+
+    def __eq__(self, to_compare):
+        """ Checks if two Magnitometer are the same """
+        try:
+            # Try to compare - this likely fails when it is compared to a non
+            # Magnitometer object
+            return \
+                (self.x == to_compare.x) and \
+                (self.y == to_compare.y) and \
+                (self.z == to_compare.z) and \
+                (self.magnetic_heading == to_compare.magnetic_heading)
+
+        except AttributeError:
+            return False
+
+    def __str__(self):
+        """ Magnitometer in string representation """
+        struct_repr = ", ".join([
+                "x: " + str(self.x),
+                "y: " + str(self.y),
+                "z: " + str(self.z),
+                "magnetic_heading: " + str(self.magnetic_heading)
+                ])
+
+        return f"Magnitometer: [{struct_repr}]"
+
+    @staticmethod
+    def translate_from_rpc(rpcMagnitometer):
+        """ Translates a gRPC struct to the SDK equivalent """
+        return Magnitometer(
+                
+                rpcMagnitometer.x,
+                
+                
+                rpcMagnitometer.y,
+                
+                
+                rpcMagnitometer.z,
+                
+                
+                rpcMagnitometer.magnetic_heading
+                )
+
+    def translate_to_rpc(self, rpcMagnitometer):
+        """ Translates this SDK object into its gRPC equivalent """
+
+        
+        
+            
+        rpcMagnitometer.x = self.x
+            
+        
+        
+        
+            
+        rpcMagnitometer.y = self.y
+            
+        
+        
+        
+            
+        rpcMagnitometer.z = self.z
+            
+        
+        
+        
+            
+        rpcMagnitometer.magnetic_heading = self.magnetic_heading
+            
+        
+        
+
+
+class BatteryVoltages:
+    """
+ 
+
+     Parameters
+     ----------
+     voltages : [uint32_t]
+         < [mV] Battery voltage of cells 1 to 10 (see voltages_ext for cells 11-14). Cells in this field above the valid cell count for this battery should have the UINT16_MAX value. If individual cell voltages are unknown or not measured for this battery, then the overall battery voltage should be filled in cell 0, with all others set to UINT16_MAX. If the voltage of the battery is greater than (UINT16_MAX - 1), then cell 0 should be set to (UINT16_MAX - 1), and cell 1 to the remaining voltage. This can be extended to multiple cells if the total voltage is greater than 2 * (UINT16_MAX - 1).
+     ext_voltages : [uint32_t]
+         < [mV] Battery voltages for cells 11 to 14. Cells above the valid cell count for this battery should have a value of 0, where zero indicates not supported (note, this is different than for the voltages field and allows empty byte truncation). If the measured value is 0 then 1 should be sent instead.
+     """
+
+    
+
+    def __init__(
+            self,
+            voltages,
+            ext_voltages):
+        """ Initializes the BatteryVoltages object """
+        self.voltages = voltages
+        self.ext_voltages = ext_voltages
+
+    def __eq__(self, to_compare):
+        """ Checks if two BatteryVoltages are the same """
+        try:
+            # Try to compare - this likely fails when it is compared to a non
+            # BatteryVoltages object
+            return \
+                (self.voltages == to_compare.voltages) and \
+                (self.ext_voltages == to_compare.ext_voltages)
+
+        except AttributeError:
+            return False
+
+    def __str__(self):
+        """ BatteryVoltages in string representation """
+        struct_repr = ", ".join([
+                "voltages: " + str(self.voltages),
+                "ext_voltages: " + str(self.ext_voltages)
+                ])
+
+        return f"BatteryVoltages: [{struct_repr}]"
+
+    @staticmethod
+    def translate_from_rpc(rpcBatteryVoltages):
+        """ Translates a gRPC struct to the SDK equivalent """
+        return BatteryVoltages(
+                
+                rpcBatteryVoltages.voltages,
+                
+                
+                rpcBatteryVoltages.ext_voltages
+                )
+
+    def translate_to_rpc(self, rpcBatteryVoltages):
+        """ Translates this SDK object into its gRPC equivalent """
+
+        
+        
+            
+        for elem in self.voltages:
+          rpcBatteryVoltages.voltages.append(elem)
+            
+        
+        
+        
+            
+        for elem in self.ext_voltages:
+          rpcBatteryVoltages.ext_voltages.append(elem)
+            
+        
+        
+
+
 
 
 class Striker(AsyncBase):
@@ -507,3 +1040,75 @@ class Striker(AsyncBase):
                 yield SysStatus.translate_from_rpc(response.sys_status)
         finally:
             sys_status_stream.cancel()
+
+    async def rc_channel(self):
+        """
+         Subscribe to 'RC channel' updates.
+
+         Yields
+         -------
+         rc_channel : RcChannel
+              RC_Channel data
+
+         
+        """
+
+        request = striker_pb2.SubscribeRcChannelRequest()
+        rc_channel_stream = self._stub.SubscribeRcChannel(request)
+
+        try:
+            async for response in rc_channel_stream:
+                
+
+            
+                yield RcChannel.translate_from_rpc(response.rc_channel)
+        finally:
+            rc_channel_stream.cancel()
+
+    async def magnitometer(self):
+        """
+         Subscribe to 'Magnitometer' updates.
+
+         Yields
+         -------
+         magnitometer : Magnitometer
+              Magnitometer data
+
+         
+        """
+
+        request = striker_pb2.SubscribeMagnitometerRequest()
+        magnitometer_stream = self._stub.SubscribeMagnitometer(request)
+
+        try:
+            async for response in magnitometer_stream:
+                
+
+            
+                yield Magnitometer.translate_from_rpc(response.magnitometer)
+        finally:
+            magnitometer_stream.cancel()
+
+    async def battery_voltages(self):
+        """
+         Subscribe to 'Battery voltage' updates.
+
+         Yields
+         -------
+         battery_voltages : BatteryVoltages
+              BatteryVoltages data
+
+         
+        """
+
+        request = striker_pb2.SubscribeBatteryVoltagesRequest()
+        battery_voltages_stream = self._stub.SubscribeBatteryVoltages(request)
+
+        try:
+            async for response in battery_voltages_stream:
+                
+
+            
+                yield BatteryVoltages.translate_from_rpc(response.battery_voltages)
+        finally:
+            battery_voltages_stream.cancel()

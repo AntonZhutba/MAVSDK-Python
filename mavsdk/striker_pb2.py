@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from . import mavsdk_options_pb2 as mavsdk__options__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15striker/striker.proto\x12\x12mavsdk.rpc.striker\x1a\x14mavsdk_options.proto\"\x1b\n\x19SubscribeHeartbeatRequest\"E\n\x11HeartbeatResponse\x12\x30\n\theartbeat\x18\x01 \x01(\x0b\x32\x1d.mavsdk.rpc.striker.Heartbeat\"\x1b\n\x19SubscribeSysStatusRequest\"F\n\x11SysStatusResponse\x12\x31\n\nsys_status\x18\x01 \x01(\x0b\x32\x1d.mavsdk.rpc.striker.SysStatus\"\x84\x01\n\tHeartbeat\x12\x13\n\x0b\x63ustom_mode\x18\x01 \x01(\r\x12\x0c\n\x04type\x18\x02 \x01(\r\x12\x11\n\tautopilot\x18\x03 \x01(\r\x12\x11\n\tbase_mode\x18\x04 \x01(\r\x12\x15\n\rsystem_status\x18\x05 \x01(\r\x12\x17\n\x0fmavlink_version\x18\x06 \x01(\r\"\xfe\x03\n\tSysStatus\x12\'\n\x1fonboard_control_sensors_present\x18\x01 \x01(\r\x12\'\n\x1fonboard_control_sensors_enabled\x18\x02 \x01(\r\x12&\n\x1eonboard_control_sensors_health\x18\x03 \x01(\r\x12\x0c\n\x04load\x18\x04 \x01(\r\x12\x17\n\x0fvoltage_battery\x18\x05 \x01(\r\x12\x17\n\x0f\x63urrent_battery\x18\x06 \x01(\x05\x12\x16\n\x0e\x64rop_rate_comm\x18\x07 \x01(\r\x12\x13\n\x0b\x65rrors_comm\x18\x08 \x01(\r\x12\x15\n\rerrors_count1\x18\t \x01(\r\x12\x15\n\rerrors_count2\x18\n \x01(\r\x12\x15\n\rerrors_count3\x18\x0b \x01(\r\x12\x15\n\rerrors_count4\x18\x0c \x01(\r\x12\x19\n\x11\x62\x61ttery_remaining\x18\r \x01(\x05\x12\x30\n(onboard_control_sensors_present_extended\x18\x0e \x01(\r\x12\x30\n(onboard_control_sensors_enabled_extended\x18\x0f \x01(\r\x12/\n\'onboard_control_sensors_health_extended\x18\x10 \x01(\r2\xf0\x01\n\x0eStrikerService\x12n\n\x12SubscribeHeartbeat\x12-.mavsdk.rpc.striker.SubscribeHeartbeatRequest\x1a%.mavsdk.rpc.striker.HeartbeatResponse\"\x00\x30\x01\x12n\n\x12SubscribeSysStatus\x12-.mavsdk.rpc.striker.SubscribeSysStatusRequest\x1a%.mavsdk.rpc.striker.SysStatusResponse\"\x00\x30\x01\x42!\n\x11io.mavsdk.strikerB\x0cStrikerProtob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15striker/striker.proto\x12\x12mavsdk.rpc.striker\x1a\x14mavsdk_options.proto\"\x1b\n\x19SubscribeHeartbeatRequest\"E\n\x11HeartbeatResponse\x12\x30\n\theartbeat\x18\x01 \x01(\x0b\x32\x1d.mavsdk.rpc.striker.Heartbeat\"\x1b\n\x19SubscribeSysStatusRequest\"F\n\x11SysStatusResponse\x12\x31\n\nsys_status\x18\x01 \x01(\x0b\x32\x1d.mavsdk.rpc.striker.SysStatus\"\x1b\n\x19SubscribeRcChannelRequest\"F\n\x11RcChannelResponse\x12\x31\n\nrc_channel\x18\x01 \x01(\x0b\x32\x1d.mavsdk.rpc.striker.RcChannel\"\x1e\n\x1cSubscribeMagnitometerRequest\"N\n\x14MagnitometerResponse\x12\x36\n\x0cmagnitometer\x18\x01 \x01(\x0b\x32 .mavsdk.rpc.striker.Magnitometer\"!\n\x1fSubscribeBatteryVoltagesRequest\"X\n\x17\x42\x61tteryVoltagesResponse\x12=\n\x10\x62\x61ttery_voltages\x18\x01 \x01(\x0b\x32#.mavsdk.rpc.striker.BatteryVoltages\"\x84\x01\n\tHeartbeat\x12\x13\n\x0b\x63ustom_mode\x18\x01 \x01(\r\x12\x0c\n\x04type\x18\x02 \x01(\r\x12\x11\n\tautopilot\x18\x03 \x01(\r\x12\x11\n\tbase_mode\x18\x04 \x01(\r\x12\x15\n\rsystem_status\x18\x05 \x01(\r\x12\x17\n\x0fmavlink_version\x18\x06 \x01(\r\"\xfe\x03\n\tSysStatus\x12\'\n\x1fonboard_control_sensors_present\x18\x01 \x01(\r\x12\'\n\x1fonboard_control_sensors_enabled\x18\x02 \x01(\r\x12&\n\x1eonboard_control_sensors_health\x18\x03 \x01(\r\x12\x0c\n\x04load\x18\x04 \x01(\r\x12\x17\n\x0fvoltage_battery\x18\x05 \x01(\r\x12\x17\n\x0f\x63urrent_battery\x18\x06 \x01(\x05\x12\x16\n\x0e\x64rop_rate_comm\x18\x07 \x01(\r\x12\x13\n\x0b\x65rrors_comm\x18\x08 \x01(\r\x12\x15\n\rerrors_count1\x18\t \x01(\r\x12\x15\n\rerrors_count2\x18\n \x01(\r\x12\x15\n\rerrors_count3\x18\x0b \x01(\r\x12\x15\n\rerrors_count4\x18\x0c \x01(\r\x12\x19\n\x11\x62\x61ttery_remaining\x18\r \x01(\x05\x12\x30\n(onboard_control_sensors_present_extended\x18\x0e \x01(\r\x12\x30\n(onboard_control_sensors_enabled_extended\x18\x0f \x01(\r\x12/\n\'onboard_control_sensors_health_extended\x18\x10 \x01(\r\"\xb4\x04\n\tRcChannel\x12\x1b\n\x0ctime_boot_ms\x18\x01 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan1_raw\x18\x02 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan2_raw\x18\x03 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan3_raw\x18\x04 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan4_raw\x18\x05 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan5_raw\x18\x06 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan6_raw\x18\x07 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan7_raw\x18\x08 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan8_raw\x18\t \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchan9_raw\x18\n \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan10_raw\x18\x0b \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan11_raw\x18\x0c \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan12_raw\x18\r \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan13_raw\x18\x0e \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan14_raw\x18\x0f \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan15_raw\x18\x10 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan16_raw\x18\x11 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan17_raw\x18\x12 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x19\n\nchan18_raw\x18\x13 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x18\n\tchancount\x18\x14 \x01(\rB\x05\x82\xb5\x18\x01\x30\x12\x13\n\x04rssi\x18\x15 \x01(\rB\x05\x82\xb5\x18\x01\x30\"I\n\x0cMagnitometer\x12\t\n\x01x\x18\x01 \x01(\x01\x12\t\n\x01y\x18\x02 \x01(\x01\x12\t\n\x01z\x18\x03 \x01(\x01\x12\x18\n\x10magnetic_heading\x18\x04 \x01(\x01\"9\n\x0f\x42\x61tteryVoltages\x12\x10\n\x08voltages\x18\x01 \x03(\r\x12\x14\n\x0c\x65xt_voltages\x18\x02 \x03(\r2\xdc\x04\n\x0eStrikerService\x12n\n\x12SubscribeHeartbeat\x12-.mavsdk.rpc.striker.SubscribeHeartbeatRequest\x1a%.mavsdk.rpc.striker.HeartbeatResponse\"\x00\x30\x01\x12n\n\x12SubscribeSysStatus\x12-.mavsdk.rpc.striker.SubscribeSysStatusRequest\x1a%.mavsdk.rpc.striker.SysStatusResponse\"\x00\x30\x01\x12n\n\x12SubscribeRcChannel\x12-.mavsdk.rpc.striker.SubscribeRcChannelRequest\x1a%.mavsdk.rpc.striker.RcChannelResponse\"\x00\x30\x01\x12w\n\x15SubscribeMagnitometer\x12\x30.mavsdk.rpc.striker.SubscribeMagnitometerRequest\x1a(.mavsdk.rpc.striker.MagnitometerResponse\"\x00\x30\x01\x12\x80\x01\n\x18SubscribeBatteryVoltages\x12\x33.mavsdk.rpc.striker.SubscribeBatteryVoltagesRequest\x1a+.mavsdk.rpc.striker.BatteryVoltagesResponse\"\x00\x30\x01\x42!\n\x11io.mavsdk.strikerB\x0cStrikerProtob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,6 +33,48 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'striker.striker_pb2', _glob
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n\021io.mavsdk.strikerB\014StrikerProto'
+  _globals['_RCCHANNEL'].fields_by_name['time_boot_ms']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['time_boot_ms']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan1_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan1_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan2_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan2_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan3_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan3_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan4_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan4_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan5_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan5_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan6_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan6_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan7_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan7_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan8_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan8_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan9_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan9_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan10_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan10_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan11_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan11_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan12_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan12_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan13_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan13_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan14_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan14_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan15_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan15_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan16_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan16_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan17_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan17_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chan18_raw']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chan18_raw']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['chancount']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['chancount']._serialized_options = b'\202\265\030\0010'
+  _globals['_RCCHANNEL'].fields_by_name['rssi']._loaded_options = None
+  _globals['_RCCHANNEL'].fields_by_name['rssi']._serialized_options = b'\202\265\030\0010'
   _globals['_SUBSCRIBEHEARTBEATREQUEST']._serialized_start=67
   _globals['_SUBSCRIBEHEARTBEATREQUEST']._serialized_end=94
   _globals['_HEARTBEATRESPONSE']._serialized_start=96
@@ -41,10 +83,28 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_SUBSCRIBESYSSTATUSREQUEST']._serialized_end=194
   _globals['_SYSSTATUSRESPONSE']._serialized_start=196
   _globals['_SYSSTATUSRESPONSE']._serialized_end=266
-  _globals['_HEARTBEAT']._serialized_start=269
-  _globals['_HEARTBEAT']._serialized_end=401
-  _globals['_SYSSTATUS']._serialized_start=404
-  _globals['_SYSSTATUS']._serialized_end=914
-  _globals['_STRIKERSERVICE']._serialized_start=917
-  _globals['_STRIKERSERVICE']._serialized_end=1157
+  _globals['_SUBSCRIBERCCHANNELREQUEST']._serialized_start=268
+  _globals['_SUBSCRIBERCCHANNELREQUEST']._serialized_end=295
+  _globals['_RCCHANNELRESPONSE']._serialized_start=297
+  _globals['_RCCHANNELRESPONSE']._serialized_end=367
+  _globals['_SUBSCRIBEMAGNITOMETERREQUEST']._serialized_start=369
+  _globals['_SUBSCRIBEMAGNITOMETERREQUEST']._serialized_end=399
+  _globals['_MAGNITOMETERRESPONSE']._serialized_start=401
+  _globals['_MAGNITOMETERRESPONSE']._serialized_end=479
+  _globals['_SUBSCRIBEBATTERYVOLTAGESREQUEST']._serialized_start=481
+  _globals['_SUBSCRIBEBATTERYVOLTAGESREQUEST']._serialized_end=514
+  _globals['_BATTERYVOLTAGESRESPONSE']._serialized_start=516
+  _globals['_BATTERYVOLTAGESRESPONSE']._serialized_end=604
+  _globals['_HEARTBEAT']._serialized_start=607
+  _globals['_HEARTBEAT']._serialized_end=739
+  _globals['_SYSSTATUS']._serialized_start=742
+  _globals['_SYSSTATUS']._serialized_end=1252
+  _globals['_RCCHANNEL']._serialized_start=1255
+  _globals['_RCCHANNEL']._serialized_end=1819
+  _globals['_MAGNITOMETER']._serialized_start=1821
+  _globals['_MAGNITOMETER']._serialized_end=1894
+  _globals['_BATTERYVOLTAGES']._serialized_start=1896
+  _globals['_BATTERYVOLTAGES']._serialized_end=1953
+  _globals['_STRIKERSERVICE']._serialized_start=1956
+  _globals['_STRIKERSERVICE']._serialized_end=2560
 # @@protoc_insertion_point(module_scope)
