@@ -136,6 +136,9 @@ class FlightMode(Enum):
      RATTITUDE
           In 'Rattitude' mode
 
+     CHASE
+          In 'CHASE' mode
+
      """
 
     
@@ -154,6 +157,7 @@ class FlightMode(Enum):
     ACRO = 12
     STABILIZED = 13
     RATTITUDE = 14
+    CHASE = 15
 
     def translate_to_rpc(self):
         if self == FlightMode.UNKNOWN:
@@ -186,6 +190,8 @@ class FlightMode(Enum):
             return telemetry_pb2.FLIGHT_MODE_STABILIZED
         if self == FlightMode.RATTITUDE:
             return telemetry_pb2.FLIGHT_MODE_RATTITUDE
+        if self == FlightMode.CHASE:
+            return telemetry_pb2.FLIGHT_MODE_CHASE
 
     @staticmethod
     def translate_from_rpc(rpc_enum_value):
@@ -220,6 +226,8 @@ class FlightMode(Enum):
             return FlightMode.STABILIZED
         if rpc_enum_value == telemetry_pb2.FLIGHT_MODE_RATTITUDE:
             return FlightMode.RATTITUDE
+        if rpc_enum_value == telemetry_pb2.FLIGHT_MODE_CHASE:
+            return FlightMode.CHASE
 
     def __str__(self):
         return self.name

@@ -43,6 +43,11 @@ class MocapServiceStub(object):
                 request_serializer=mocap_dot_mocap__pb2.SetVisionPositionEstimateRequest.SerializeToString,
                 response_deserializer=mocap_dot_mocap__pb2.SetVisionPositionEstimateResponse.FromString,
                 _registered_method=True)
+        self.SetVisionSpeedEstimate = channel.unary_unary(
+                '/mavsdk.rpc.mocap.MocapService/SetVisionSpeedEstimate',
+                request_serializer=mocap_dot_mocap__pb2.SetVisionSpeedEstimateRequest.SerializeToString,
+                response_deserializer=mocap_dot_mocap__pb2.SetVisionSpeedEstimateResponse.FromString,
+                _registered_method=True)
         self.SetAttitudePositionMocap = channel.unary_unary(
                 '/mavsdk.rpc.mocap.MocapService/SetAttitudePositionMocap',
                 request_serializer=mocap_dot_mocap__pb2.SetAttitudePositionMocapRequest.SerializeToString,
@@ -69,6 +74,13 @@ class MocapServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SetVisionSpeedEstimate(self, request, context):
+        """Send Global speed estimate from a vision source.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def SetAttitudePositionMocap(self, request, context):
         """Send motion capture attitude and position.
         """
@@ -90,6 +102,11 @@ def add_MocapServiceServicer_to_server(servicer, server):
                     servicer.SetVisionPositionEstimate,
                     request_deserializer=mocap_dot_mocap__pb2.SetVisionPositionEstimateRequest.FromString,
                     response_serializer=mocap_dot_mocap__pb2.SetVisionPositionEstimateResponse.SerializeToString,
+            ),
+            'SetVisionSpeedEstimate': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetVisionSpeedEstimate,
+                    request_deserializer=mocap_dot_mocap__pb2.SetVisionSpeedEstimateRequest.FromString,
+                    response_serializer=mocap_dot_mocap__pb2.SetVisionSpeedEstimateResponse.SerializeToString,
             ),
             'SetAttitudePositionMocap': grpc.unary_unary_rpc_method_handler(
                     servicer.SetAttitudePositionMocap,
@@ -133,6 +150,33 @@ class MocapService(object):
             '/mavsdk.rpc.mocap.MocapService/SetVisionPositionEstimate',
             mocap_dot_mocap__pb2.SetVisionPositionEstimateRequest.SerializeToString,
             mocap_dot_mocap__pb2.SetVisionPositionEstimateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SetVisionSpeedEstimate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/mavsdk.rpc.mocap.MocapService/SetVisionSpeedEstimate',
+            mocap_dot_mocap__pb2.SetVisionSpeedEstimateRequest.SerializeToString,
+            mocap_dot_mocap__pb2.SetVisionSpeedEstimateResponse.FromString,
             options,
             channel_credentials,
             insecure,
