@@ -61,6 +61,26 @@ class StrikerServiceStub(object):
                 request_serializer=striker_dot_striker__pb2.SubscribeBatteryVoltagesRequest.SerializeToString,
                 response_deserializer=striker_dot_striker__pb2.BatteryVoltagesResponse.FromString,
                 _registered_method=True)
+        self.SubscribeAvailableModes = channel.unary_stream(
+                '/mavsdk.rpc.striker.StrikerService/SubscribeAvailableModes',
+                request_serializer=striker_dot_striker__pb2.SubscribeAvailableModesRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.AvailableModesResponse.FromString,
+                _registered_method=True)
+        self.SetManualFlightMode = channel.unary_unary(
+                '/mavsdk.rpc.striker.StrikerService/SetManualFlightMode',
+                request_serializer=striker_dot_striker__pb2.SetManualFlightModeRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.SetManualFlightModeResponse.FromString,
+                _registered_method=True)
+        self.SubscribeActuatorServosStatus = channel.unary_stream(
+                '/mavsdk.rpc.striker.StrikerService/SubscribeActuatorServosStatus',
+                request_serializer=striker_dot_striker__pb2.SubscribeActuatorServosStatusRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.ActuatorServosStatusResponse.FromString,
+                _registered_method=True)
+        self.SetRateActuatorServosStatus = channel.unary_unary(
+                '/mavsdk.rpc.striker.StrikerService/SetRateActuatorServosStatus',
+                request_serializer=striker_dot_striker__pb2.SetRateActuatorServosStatusRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.SetRateActuatorServosStatusResponse.FromString,
+                _registered_method=True)
 
 
 class StrikerServiceServicer(object):
@@ -103,6 +123,34 @@ class StrikerServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SubscribeAvailableModes(self, request, context):
+        """Subscribe to 'Available Modes' updates.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetManualFlightMode(self, request, context):
+        """Set the vehicle mode.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SubscribeActuatorServosStatus(self, request, context):
+        """Subscribe to 'Actuator Servos Status' updates.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetRateActuatorServosStatus(self, request, context):
+        """Set the actuator control target.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_StrikerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -130,6 +178,26 @@ def add_StrikerServiceServicer_to_server(servicer, server):
                     servicer.SubscribeBatteryVoltages,
                     request_deserializer=striker_dot_striker__pb2.SubscribeBatteryVoltagesRequest.FromString,
                     response_serializer=striker_dot_striker__pb2.BatteryVoltagesResponse.SerializeToString,
+            ),
+            'SubscribeAvailableModes': grpc.unary_stream_rpc_method_handler(
+                    servicer.SubscribeAvailableModes,
+                    request_deserializer=striker_dot_striker__pb2.SubscribeAvailableModesRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.AvailableModesResponse.SerializeToString,
+            ),
+            'SetManualFlightMode': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetManualFlightMode,
+                    request_deserializer=striker_dot_striker__pb2.SetManualFlightModeRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.SetManualFlightModeResponse.SerializeToString,
+            ),
+            'SubscribeActuatorServosStatus': grpc.unary_stream_rpc_method_handler(
+                    servicer.SubscribeActuatorServosStatus,
+                    request_deserializer=striker_dot_striker__pb2.SubscribeActuatorServosStatusRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.ActuatorServosStatusResponse.SerializeToString,
+            ),
+            'SetRateActuatorServosStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetRateActuatorServosStatus,
+                    request_deserializer=striker_dot_striker__pb2.SetRateActuatorServosStatusRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.SetRateActuatorServosStatusResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -269,6 +337,114 @@ class StrikerService(object):
             '/mavsdk.rpc.striker.StrikerService/SubscribeBatteryVoltages',
             striker_dot_striker__pb2.SubscribeBatteryVoltagesRequest.SerializeToString,
             striker_dot_striker__pb2.BatteryVoltagesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SubscribeAvailableModes(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(
+            request,
+            target,
+            '/mavsdk.rpc.striker.StrikerService/SubscribeAvailableModes',
+            striker_dot_striker__pb2.SubscribeAvailableModesRequest.SerializeToString,
+            striker_dot_striker__pb2.AvailableModesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SetManualFlightMode(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/mavsdk.rpc.striker.StrikerService/SetManualFlightMode',
+            striker_dot_striker__pb2.SetManualFlightModeRequest.SerializeToString,
+            striker_dot_striker__pb2.SetManualFlightModeResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SubscribeActuatorServosStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(
+            request,
+            target,
+            '/mavsdk.rpc.striker.StrikerService/SubscribeActuatorServosStatus',
+            striker_dot_striker__pb2.SubscribeActuatorServosStatusRequest.SerializeToString,
+            striker_dot_striker__pb2.ActuatorServosStatusResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SetRateActuatorServosStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/mavsdk.rpc.striker.StrikerService/SetRateActuatorServosStatus',
+            striker_dot_striker__pb2.SetRateActuatorServosStatusRequest.SerializeToString,
+            striker_dot_striker__pb2.SetRateActuatorServosStatusResponse.FromString,
             options,
             channel_credentials,
             insecure,
