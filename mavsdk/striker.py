@@ -1659,3 +1659,23 @@ class Striker(AsyncBase):
         if result.result != StrikerResult.Result.SUCCESS:
             raise StrikerError(result, "set_rate_actuator_servos_status()", rate_hz)
         
+
+    async def request_available_modes(self):
+        """
+         Request available modes.
+
+         Raises
+         ------
+         StrikerError
+             If the request fails. The error contains the reason for the failure.
+        """
+
+        request = striker_pb2.RequestAvailableModesRequest()
+        response = await self._stub.RequestAvailableModes(request)
+
+        
+        result = self._extract_result(response)
+
+        if result.result != StrikerResult.Result.SUCCESS:
+            raise StrikerError(result, "request_available_modes()")
+        

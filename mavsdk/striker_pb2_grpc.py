@@ -81,6 +81,11 @@ class StrikerServiceStub(object):
                 request_serializer=striker_dot_striker__pb2.SetRateActuatorServosStatusRequest.SerializeToString,
                 response_deserializer=striker_dot_striker__pb2.SetRateActuatorServosStatusResponse.FromString,
                 _registered_method=True)
+        self.RequestAvailableModes = channel.unary_unary(
+                '/mavsdk.rpc.striker.StrikerService/RequestAvailableModes',
+                request_serializer=striker_dot_striker__pb2.RequestAvailableModesRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.RequestAvailableModesResponse.FromString,
+                _registered_method=True)
 
 
 class StrikerServiceServicer(object):
@@ -151,6 +156,13 @@ class StrikerServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def RequestAvailableModes(self, request, context):
+        """Request available modes.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_StrikerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -198,6 +210,11 @@ def add_StrikerServiceServicer_to_server(servicer, server):
                     servicer.SetRateActuatorServosStatus,
                     request_deserializer=striker_dot_striker__pb2.SetRateActuatorServosStatusRequest.FromString,
                     response_serializer=striker_dot_striker__pb2.SetRateActuatorServosStatusResponse.SerializeToString,
+            ),
+            'RequestAvailableModes': grpc.unary_unary_rpc_method_handler(
+                    servicer.RequestAvailableModes,
+                    request_deserializer=striker_dot_striker__pb2.RequestAvailableModesRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.RequestAvailableModesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -445,6 +462,33 @@ class StrikerService(object):
             '/mavsdk.rpc.striker.StrikerService/SetRateActuatorServosStatus',
             striker_dot_striker__pb2.SetRateActuatorServosStatusRequest.SerializeToString,
             striker_dot_striker__pb2.SetRateActuatorServosStatusResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RequestAvailableModes(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/mavsdk.rpc.striker.StrikerService/RequestAvailableModes',
+            striker_dot_striker__pb2.RequestAvailableModesRequest.SerializeToString,
+            striker_dot_striker__pb2.RequestAvailableModesResponse.FromString,
             options,
             channel_credentials,
             insecure,
