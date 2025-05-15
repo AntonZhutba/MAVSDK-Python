@@ -1431,7 +1431,7 @@ class Striker(AsyncBase):
     
     def _extract_result(self, response):
         """ Returns the response status and description """
-        return StrikerResult.translate_from_rpc(response.result)
+        return StrikerResult.translate_from_rpc(response.striker_result)
     
 
     async def heartbeat(self):
