@@ -1201,3 +1201,33 @@ class MissionRaw(AsyncBase):
 
         return MissionImportData.translate_from_rpc(response.mission_import_data)
             
+
+    async def is_mission_finished(self):
+        """
+         Check if the mission is finished.
+
+         Returns true if the mission is finished, false otherwise.
+
+         Returns
+         -------
+         is_finished : bool
+              True if the mission is finished, false otherwise
+
+         Raises
+         ------
+         MissionRawError
+             If the request fails. The error contains the reason for the failure.
+        """
+
+        request = mission_raw_pb2.IsMissionFinishedRequest()
+        response = await self._stub.IsMissionFinished(request)
+
+        
+        result = self._extract_result(response)
+
+        if result.result != MissionRawResult.Result.SUCCESS:
+            raise MissionRawError(result, "is_mission_finished()")
+        
+
+        return response.is_finished
+        

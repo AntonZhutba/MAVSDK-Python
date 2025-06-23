@@ -5,7 +5,7 @@ import warnings
 
 from . import mission_raw_pb2 as mission__raw_dot_mission__raw__pb2
 
-GRPC_GENERATED_VERSION = '1.71.0'
+GRPC_GENERATED_VERSION = '1.70.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -114,6 +114,11 @@ class MissionRawServiceStub(object):
                 '/mavsdk.rpc.mission_raw.MissionRawService/ImportQgroundcontrolMissionFromString',
                 request_serializer=mission__raw_dot_mission__raw__pb2.ImportQgroundcontrolMissionFromStringRequest.SerializeToString,
                 response_deserializer=mission__raw_dot_mission__raw__pb2.ImportQgroundcontrolMissionFromStringResponse.FromString,
+                _registered_method=True)
+        self.IsMissionFinished = channel.unary_unary(
+                '/mavsdk.rpc.mission_raw.MissionRawService/IsMissionFinished',
+                request_serializer=mission__raw_dot_mission__raw__pb2.IsMissionFinishedRequest.SerializeToString,
+                response_deserializer=mission__raw_dot_mission__raw__pb2.IsMissionFinishedResponse.FromString,
                 _registered_method=True)
 
 
@@ -279,6 +284,16 @@ class MissionRawServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def IsMissionFinished(self, request, context):
+        """
+        Check if the mission is finished.
+
+        Returns true if the mission is finished, false otherwise.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MissionRawServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -361,6 +376,11 @@ def add_MissionRawServiceServicer_to_server(servicer, server):
                     servicer.ImportQgroundcontrolMissionFromString,
                     request_deserializer=mission__raw_dot_mission__raw__pb2.ImportQgroundcontrolMissionFromStringRequest.FromString,
                     response_serializer=mission__raw_dot_mission__raw__pb2.ImportQgroundcontrolMissionFromStringResponse.SerializeToString,
+            ),
+            'IsMissionFinished': grpc.unary_unary_rpc_method_handler(
+                    servicer.IsMissionFinished,
+                    request_deserializer=mission__raw_dot_mission__raw__pb2.IsMissionFinishedRequest.FromString,
+                    response_serializer=mission__raw_dot_mission__raw__pb2.IsMissionFinishedResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -796,6 +816,33 @@ class MissionRawService(object):
             '/mavsdk.rpc.mission_raw.MissionRawService/ImportQgroundcontrolMissionFromString',
             mission__raw_dot_mission__raw__pb2.ImportQgroundcontrolMissionFromStringRequest.SerializeToString,
             mission__raw_dot_mission__raw__pb2.ImportQgroundcontrolMissionFromStringResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def IsMissionFinished(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/mavsdk.rpc.mission_raw.MissionRawService/IsMissionFinished',
+            mission__raw_dot_mission__raw__pb2.IsMissionFinishedRequest.SerializeToString,
+            mission__raw_dot_mission__raw__pb2.IsMissionFinishedResponse.FromString,
             options,
             channel_credentials,
             insecure,
