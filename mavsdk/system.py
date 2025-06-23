@@ -21,6 +21,7 @@ from . import gimbal
 from . import gripper
 from . import info
 from . import log_files
+from . import log_streaming
 from . import manual_control
 from . import mission
 from . import mission_raw
@@ -147,6 +148,7 @@ class System:
         self._plugins["gripper"] = gripper.Gripper(plugin_manager)
         self._plugins["info"] = info.Info(plugin_manager)
         self._plugins["log_files"] = log_files.LogFiles(plugin_manager)
+        self._plugins["log_streaming"] = log_streaming.LogStreaming(plugin_manager)
         self._plugins["manual_control"] = manual_control.ManualControl(plugin_manager)
         self._plugins["mission"] = mission.Mission(plugin_manager)
         self._plugins["mission_raw"] = mission_raw.MissionRaw(plugin_manager)
@@ -168,7 +170,7 @@ class System:
 
     @staticmethod
     def error_uninitialized(plugin_name: str) -> str:
-        return "{plugin_name} plugin has not been initialized! " \
+        return f"{plugin_name} plugin has not been initialized! " \
             "Did you run `System.connect()`?"
 
     @property
@@ -266,6 +268,12 @@ class System:
         if "log_files" not in self._plugins:
             raise RuntimeError(self.error_uninitialized("LogFiles"))
         return self._plugins["log_files"]
+
+    @property
+    def log_streaming(self) -> log_streaming.LogStreaming:
+        if "log_streaming" not in self._plugins:
+            raise RuntimeError(self.error_uninitialized("LogStreaming"))
+        return self._plugins["log_streaming"]
 
     @property
     def manual_control(self) -> manual_control.ManualControl:

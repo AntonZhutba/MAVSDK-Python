@@ -5,7 +5,7 @@ import warnings
 
 from . import telemetry_pb2 as telemetry_dot_telemetry__pb2
 
-GRPC_GENERATED_VERSION = '1.70.0'
+GRPC_GENERATED_VERSION = '1.71.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -316,6 +316,11 @@ class TelemetryServiceStub(object):
                 '/mavsdk.rpc.telemetry.TelemetryService/SetRateAltitude',
                 request_serializer=telemetry_dot_telemetry__pb2.SetRateAltitudeRequest.SerializeToString,
                 response_deserializer=telemetry_dot_telemetry__pb2.SetRateAltitudeResponse.FromString,
+                _registered_method=True)
+        self.SetRateHealth = channel.unary_unary(
+                '/mavsdk.rpc.telemetry.TelemetryService/SetRateHealth',
+                request_serializer=telemetry_dot_telemetry__pb2.SetRateHealthRequest.SerializeToString,
+                response_deserializer=telemetry_dot_telemetry__pb2.SetRateHealthResponse.FromString,
                 _registered_method=True)
         self.GetGpsGlobalOrigin = channel.unary_unary(
                 '/mavsdk.rpc.telemetry.TelemetryService/GetGpsGlobalOrigin',
@@ -723,6 +728,13 @@ class TelemetryServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SetRateHealth(self, request, context):
+        """Set rate to 'Health' updates.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetGpsGlobalOrigin(self, request, context):
         """Get the GPS location of where the estimator has been initialized.
         """
@@ -1012,6 +1024,11 @@ def add_TelemetryServiceServicer_to_server(servicer, server):
                     servicer.SetRateAltitude,
                     request_deserializer=telemetry_dot_telemetry__pb2.SetRateAltitudeRequest.FromString,
                     response_serializer=telemetry_dot_telemetry__pb2.SetRateAltitudeResponse.SerializeToString,
+            ),
+            'SetRateHealth': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetRateHealth,
+                    request_deserializer=telemetry_dot_telemetry__pb2.SetRateHealthRequest.FromString,
+                    response_serializer=telemetry_dot_telemetry__pb2.SetRateHealthResponse.SerializeToString,
             ),
             'GetGpsGlobalOrigin': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGpsGlobalOrigin,
@@ -2534,6 +2551,33 @@ class TelemetryService(object):
             '/mavsdk.rpc.telemetry.TelemetryService/SetRateAltitude',
             telemetry_dot_telemetry__pb2.SetRateAltitudeRequest.SerializeToString,
             telemetry_dot_telemetry__pb2.SetRateAltitudeResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SetRateHealth(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/mavsdk.rpc.telemetry.TelemetryService/SetRateHealth',
+            telemetry_dot_telemetry__pb2.SetRateHealthRequest.SerializeToString,
+            telemetry_dot_telemetry__pb2.SetRateHealthResponse.FromString,
             options,
             channel_credentials,
             insecure,

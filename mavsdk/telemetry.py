@@ -82,6 +82,66 @@ class FixType(Enum):
         return self.name
 
 
+class BatteryFunction(Enum):
+    """
+     Battery function type.
+
+     Values
+     ------
+     UNKNOWN
+          Battery function is unknown
+
+     ALL
+          Battery supports all flight systems
+
+     PROPULSION
+          Battery for the propulsion system
+
+     AVIONICS
+          Avionics battery
+
+     PAYLOAD
+          Payload battery
+
+     """
+
+    
+    UNKNOWN = 0
+    ALL = 1
+    PROPULSION = 2
+    AVIONICS = 3
+    PAYLOAD = 4
+
+    def translate_to_rpc(self):
+        if self == BatteryFunction.UNKNOWN:
+            return telemetry_pb2.BATTERY_FUNCTION_UNKNOWN
+        if self == BatteryFunction.ALL:
+            return telemetry_pb2.BATTERY_FUNCTION_ALL
+        if self == BatteryFunction.PROPULSION:
+            return telemetry_pb2.BATTERY_FUNCTION_PROPULSION
+        if self == BatteryFunction.AVIONICS:
+            return telemetry_pb2.BATTERY_FUNCTION_AVIONICS
+        if self == BatteryFunction.PAYLOAD:
+            return telemetry_pb2.BATTERY_FUNCTION_PAYLOAD
+
+    @staticmethod
+    def translate_from_rpc(rpc_enum_value):
+        """ Parses a gRPC response """
+        if rpc_enum_value == telemetry_pb2.BATTERY_FUNCTION_UNKNOWN:
+            return BatteryFunction.UNKNOWN
+        if rpc_enum_value == telemetry_pb2.BATTERY_FUNCTION_ALL:
+            return BatteryFunction.ALL
+        if rpc_enum_value == telemetry_pb2.BATTERY_FUNCTION_PROPULSION:
+            return BatteryFunction.PROPULSION
+        if rpc_enum_value == telemetry_pb2.BATTERY_FUNCTION_AVIONICS:
+            return BatteryFunction.AVIONICS
+        if rpc_enum_value == telemetry_pb2.BATTERY_FUNCTION_PAYLOAD:
+            return BatteryFunction.PAYLOAD
+
+    def __str__(self):
+        return self.name
+
+
 class FlightMode(Enum):
     """
      Flight modes.
@@ -1290,6 +1350,12 @@ class Battery:
      remaining_percent : float
           Estimated battery remaining (range: 0 to 100)
 
+     time_remaining_s : float
+          Estimated battery usage time remaining 
+
+     battery_function : BatteryFunction
+          Function of the battery
+
      """
 
     
@@ -1301,7 +1367,9 @@ class Battery:
             voltage_v,
             current_battery_a,
             capacity_consumed_ah,
-            remaining_percent):
+            remaining_percent,
+            time_remaining_s,
+            battery_function):
         """ Initializes the Battery object """
         self.id = id
         self.temperature_degc = temperature_degc
@@ -1309,6 +1377,8 @@ class Battery:
         self.current_battery_a = current_battery_a
         self.capacity_consumed_ah = capacity_consumed_ah
         self.remaining_percent = remaining_percent
+        self.time_remaining_s = time_remaining_s
+        self.battery_function = battery_function
 
     def __eq__(self, to_compare):
         """ Checks if two Battery are the same """
@@ -1321,7 +1391,9 @@ class Battery:
                 (self.voltage_v == to_compare.voltage_v) and \
                 (self.current_battery_a == to_compare.current_battery_a) and \
                 (self.capacity_consumed_ah == to_compare.capacity_consumed_ah) and \
-                (self.remaining_percent == to_compare.remaining_percent)
+                (self.remaining_percent == to_compare.remaining_percent) and \
+                (self.time_remaining_s == to_compare.time_remaining_s) and \
+                (self.battery_function == to_compare.battery_function)
 
         except AttributeError:
             return False
@@ -1334,7 +1406,9 @@ class Battery:
                 "voltage_v: " + str(self.voltage_v),
                 "current_battery_a: " + str(self.current_battery_a),
                 "capacity_consumed_ah: " + str(self.capacity_consumed_ah),
-                "remaining_percent: " + str(self.remaining_percent)
+                "remaining_percent: " + str(self.remaining_percent),
+                "time_remaining_s: " + str(self.time_remaining_s),
+                "battery_function: " + str(self.battery_function)
                 ])
 
         return f"Battery: [{struct_repr}]"
@@ -1359,7 +1433,13 @@ class Battery:
                 rpcBattery.capacity_consumed_ah,
                 
                 
-                rpcBattery.remaining_percent
+                rpcBattery.remaining_percent,
+                
+                
+                rpcBattery.time_remaining_s,
+                
+                
+                BatteryFunction.translate_from_rpc(rpcBattery.battery_function)
                 )
 
     def translate_to_rpc(self, rpcBattery):
@@ -1399,6 +1479,18 @@ class Battery:
         
             
         rpcBattery.remaining_percent = self.remaining_percent
+            
+        
+        
+        
+            
+        rpcBattery.time_remaining_s = self.time_remaining_s
+            
+        
+        
+        
+            
+        rpcBattery.battery_function = self.battery_function.translate_to_rpc()
             
         
         
@@ -5434,6 +5526,32 @@ class Telemetry(AsyncBase):
 
         if result.result != TelemetryResult.Result.SUCCESS:
             raise TelemetryError(result, "set_rate_altitude()", rate_hz)
+        
+
+    async def set_rate_health(self, rate_hz):
+        """
+         Set rate to 'Health' updates.
+
+         Parameters
+         ----------
+         rate_hz : double
+              The requested rate (in Hertz)
+
+         Raises
+         ------
+         TelemetryError
+             If the request fails. The error contains the reason for the failure.
+        """
+
+        request = telemetry_pb2.SetRateHealthRequest()
+        request.rate_hz = rate_hz
+        response = await self._stub.SetRateHealth(request)
+
+        
+        result = self._extract_result(response)
+
+        if result.result != TelemetryResult.Result.SUCCESS:
+            raise TelemetryError(result, "set_rate_health()", rate_hz)
         
 
     async def get_gps_global_origin(self):
