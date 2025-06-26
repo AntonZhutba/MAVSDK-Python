@@ -86,6 +86,16 @@ class StrikerServiceStub(object):
                 request_serializer=striker_dot_striker__pb2.RequestAvailableModesRequest.SerializeToString,
                 response_deserializer=striker_dot_striker__pb2.RequestAvailableModesResponse.FromString,
                 _registered_method=True)
+        self.SubscribeCaaConfidenceLevel = channel.unary_stream(
+                '/mavsdk.rpc.striker.StrikerService/SubscribeCaaConfidenceLevel',
+                request_serializer=striker_dot_striker__pb2.SubscribeCaaConfidenceLevelRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.CaaConfidenceLevelResponse.FromString,
+                _registered_method=True)
+        self.SetRateCaaConfidenceLevel = channel.unary_unary(
+                '/mavsdk.rpc.striker.StrikerService/SetRateCaaConfidenceLevel',
+                request_serializer=striker_dot_striker__pb2.SetRateCaaConfidenceLevelRequest.SerializeToString,
+                response_deserializer=striker_dot_striker__pb2.SetRateCaaConfidenceLevelResponse.FromString,
+                _registered_method=True)
 
 
 class StrikerServiceServicer(object):
@@ -163,6 +173,20 @@ class StrikerServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SubscribeCaaConfidenceLevel(self, request, context):
+        """Subscribe to 'CAA confidence level' updates.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetRateCaaConfidenceLevel(self, request, context):
+        """Set the caa confidence level target. 
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_StrikerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -215,6 +239,16 @@ def add_StrikerServiceServicer_to_server(servicer, server):
                     servicer.RequestAvailableModes,
                     request_deserializer=striker_dot_striker__pb2.RequestAvailableModesRequest.FromString,
                     response_serializer=striker_dot_striker__pb2.RequestAvailableModesResponse.SerializeToString,
+            ),
+            'SubscribeCaaConfidenceLevel': grpc.unary_stream_rpc_method_handler(
+                    servicer.SubscribeCaaConfidenceLevel,
+                    request_deserializer=striker_dot_striker__pb2.SubscribeCaaConfidenceLevelRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.CaaConfidenceLevelResponse.SerializeToString,
+            ),
+            'SetRateCaaConfidenceLevel': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetRateCaaConfidenceLevel,
+                    request_deserializer=striker_dot_striker__pb2.SetRateCaaConfidenceLevelRequest.FromString,
+                    response_serializer=striker_dot_striker__pb2.SetRateCaaConfidenceLevelResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -489,6 +523,60 @@ class StrikerService(object):
             '/mavsdk.rpc.striker.StrikerService/RequestAvailableModes',
             striker_dot_striker__pb2.RequestAvailableModesRequest.SerializeToString,
             striker_dot_striker__pb2.RequestAvailableModesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SubscribeCaaConfidenceLevel(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(
+            request,
+            target,
+            '/mavsdk.rpc.striker.StrikerService/SubscribeCaaConfidenceLevel',
+            striker_dot_striker__pb2.SubscribeCaaConfidenceLevelRequest.SerializeToString,
+            striker_dot_striker__pb2.CaaConfidenceLevelResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SetRateCaaConfidenceLevel(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/mavsdk.rpc.striker.StrikerService/SetRateCaaConfidenceLevel',
+            striker_dot_striker__pb2.SetRateCaaConfidenceLevelRequest.SerializeToString,
+            striker_dot_striker__pb2.SetRateCaaConfidenceLevelResponse.FromString,
             options,
             channel_credentials,
             insecure,

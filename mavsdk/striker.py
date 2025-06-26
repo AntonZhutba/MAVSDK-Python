@@ -80,6 +80,80 @@ class ActuatorServosStatus:
         
 
 
+class CaaConfidenceLevel:
+    """
+     CAA confidence level.
+
+     Parameters
+     ----------
+     time_usec : uint64_t
+          Time since system start [in microseconds].
+
+     confidence_level : float
+          Single float confidence level value, between 0.0 (no confidence) and 1.0 (max confidence), (NaN if unavailable).
+
+     """
+
+    
+
+    def __init__(
+            self,
+            time_usec,
+            confidence_level):
+        """ Initializes the CaaConfidenceLevel object """
+        self.time_usec = time_usec
+        self.confidence_level = confidence_level
+
+    def __eq__(self, to_compare):
+        """ Checks if two CaaConfidenceLevel are the same """
+        try:
+            # Try to compare - this likely fails when it is compared to a non
+            # CaaConfidenceLevel object
+            return \
+                (self.time_usec == to_compare.time_usec) and \
+                (self.confidence_level == to_compare.confidence_level)
+
+        except AttributeError:
+            return False
+
+    def __str__(self):
+        """ CaaConfidenceLevel in string representation """
+        struct_repr = ", ".join([
+                "time_usec: " + str(self.time_usec),
+                "confidence_level: " + str(self.confidence_level)
+                ])
+
+        return f"CaaConfidenceLevel: [{struct_repr}]"
+
+    @staticmethod
+    def translate_from_rpc(rpcCaaConfidenceLevel):
+        """ Translates a gRPC struct to the SDK equivalent """
+        return CaaConfidenceLevel(
+                
+                rpcCaaConfidenceLevel.time_usec,
+                
+                
+                rpcCaaConfidenceLevel.confidence_level
+                )
+
+    def translate_to_rpc(self, rpcCaaConfidenceLevel):
+        """ Translates this SDK object into its gRPC equivalent """
+
+        
+        
+            
+        rpcCaaConfidenceLevel.time_usec = self.time_usec
+            
+        
+        
+        
+            
+        rpcCaaConfidenceLevel.confidence_level = self.confidence_level
+            
+        
+        
+
+
 class Heartbeat:
     """
      Heartbeat type.
@@ -1678,4 +1752,54 @@ class Striker(AsyncBase):
 
         if result.result != StrikerResult.Result.SUCCESS:
             raise StrikerError(result, "request_available_modes()")
+        
+
+    async def caa_confidence_level(self):
+        """
+         Subscribe to 'CAA confidence level' updates.
+
+         Yields
+         -------
+         caa_confidence_level : CaaConfidenceLevel
+              CAA confidence level data
+
+         
+        """
+
+        request = striker_pb2.SubscribeCaaConfidenceLevelRequest()
+        caa_confidence_level_stream = self._stub.SubscribeCaaConfidenceLevel(request)
+
+        try:
+            async for response in caa_confidence_level_stream:
+                
+
+            
+                yield CaaConfidenceLevel.translate_from_rpc(response.caa_confidence_level)
+        finally:
+            caa_confidence_level_stream.cancel()
+
+    async def set_rate_caa_confidence_level(self, rate_hz):
+        """
+         Set the caa confidence level target.
+
+         Parameters
+         ----------
+         rate_hz : double
+              The requested rate (in Hertz)
+
+         Raises
+         ------
+         StrikerError
+             If the request fails. The error contains the reason for the failure.
+        """
+
+        request = striker_pb2.SetRateCaaConfidenceLevelRequest()
+        request.rate_hz = rate_hz
+        response = await self._stub.SetRateCaaConfidenceLevel(request)
+
+        
+        result = self._extract_result(response)
+
+        if result.result != StrikerResult.Result.SUCCESS:
+            raise StrikerError(result, "set_rate_caa_confidence_level()", rate_hz)
         
